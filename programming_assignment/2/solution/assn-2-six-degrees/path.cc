@@ -11,8 +11,14 @@ using namespace std;
  * each entry in the vector is one leg in the path from an actor to
  * another.
  */
+path::path(){};
 
-path::path(const string& player) : startPlayer(player) {} 
+path::path(const string& player) : startPlayer(player) {}
+
+path::path(const path& origin) : startPlayer(origin.startPlayer){
+  for (int i = 0; i < origin.getLength(); i++)
+    this->addConnection(origin.links[i].movie, origin.links[i].player);
+}
 // ommission of links from init list calls the default constructor
 
 /**
@@ -60,6 +66,13 @@ void path::reverse()
 
   // then assign self to its reverse
   *this = reverseOfPath;
+}
+
+
+void path::append(path &other){
+    for(int i = 0; i < other.getLength(); i++){
+        links.push_back(other.links[i]);
+    }
 }
 
 ostream& operator<<(ostream& os, const path& p)

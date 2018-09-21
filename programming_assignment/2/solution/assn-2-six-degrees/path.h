@@ -46,8 +46,11 @@ class path {
    * appends movie/actor pairs, and the path shrinks when
    * the client calls undoConnection.
    */
+  path();
 
   path(const string& startPlayer);
+
+  path(const path& origin);
 
   /**
    * Method: getLength
@@ -113,6 +116,8 @@ class path {
    */
 
   void reverse();
+
+  void append(path &other);
   
  private:
   // private struct definition... no one else uses it, so I define it internally
